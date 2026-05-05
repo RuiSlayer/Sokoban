@@ -9,10 +9,13 @@ import java.util.Scanner;
 
 
 public class LeaderBoard {
-	
+
 	public static void LerLeaderBoard() {
 		ArrayList<Jogador_Score> melhoresJogadores= new ArrayList<Jogador_Score>();
 		try {
+			File scoresDir = new File("scores");
+			if (!scoresDir.exists())
+				scoresDir.mkdirs();
 			Scanner scanner = new Scanner(new File("scores/LeaderBoard" + SokobanGame.getInstance().getNivelNr() + ".txt"));
 			
 			while(scanner.hasNext()) {
@@ -24,7 +27,7 @@ public class LeaderBoard {
 			scanner.close();
 		}
 		catch (FileNotFoundException e) {
-			System.err.println("ficheiro nao encontrado");
+			System.err.println("LeaderBoard nao existe, a criar...");
 		}
 		CriarLeaderBoard(melhoresJogadores);
 	}
@@ -50,5 +53,5 @@ public class LeaderBoard {
 		catch (FileNotFoundException e) {
 			System.err.println("problema a escrever o ficheiro");
 		}
-	}	
+	}
 }

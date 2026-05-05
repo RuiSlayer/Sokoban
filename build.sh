@@ -1,19 +1,7 @@
 #!/bin/bash
 set -e
 
-case "$1" in
-  run)
-    echo ">> Running..."
-    java -jar sokoban.jar
-    ;;
-
-  clean)
-    echo ">> Cleaning..."
-    rm -rf build/ lib/bin/ lib/poo-lib.jar lib_sources.txt sources.txt manifest.txt sokoban.jar
-    echo ">> Clean done!"
-    ;;
-
-  build|"")
+build() {
     echo ">> Compiling library..."
     find lib/src -name "*.java" > lib_sources.txt
     mkdir -p lib/bin
@@ -30,7 +18,45 @@ case "$1" in
     echo "Main-Class: sokoban.starter.Main" > manifest.txt
     jar -cvfm sokoban.jar manifest.txt -C build/ .
 
-    echo ">> Done! Run with: bash build.sh run"
+    echo ">> Done!"
+}
+
+is_up_to_date() {
+    # Returns 0 (true) if sokoban.jar exists and is newer than all source files
+    if [ ! -f sokoban.jar ]; then
+        return 1
+    fi
+    # Find any source file newer than sokoban.jar
+    newer=$(find src lib/src -name "*.java" -newer sokoban.jar 2>/dev/null)
+    [ -z "$newer" ]
+}
+
+case "$1" in
+  run)
+    if is_up_to_date; then
+        echo ">> Build is up to date, skipping build..."
+    else
+        echo ">> JAR not found or sources changed, building first..."
+        build
+    fi
+    echo ">> Running..."
+    java -jar sokoban.jar
+    ;;
+
+  clean)
+    echo ">> Cleaning..."
+    rm -rf build/ lib/bin/ lib/poo-lib.jar lib_sources.txt sources.txt manifest.txt sokoban.jar
+    echo ">> Clean done!"
+    ;;
+
+  build|"")
+    if is_up_to_date; then
+        echo ">> Nothing to do, build is already up to date."
+        echo ">> Use 'bash build.sh clean' first to force a rebuild."
+    else
+        build
+        echo ">> Run with: bash build.sh run"
+    fi
     ;;
 
   *)

@@ -85,6 +85,8 @@ This will:
 2. Compile all project source files in `src/`
 3. Package everything into `sokoban.jar`
 
+> 💡 If the project is already built and no source files have changed, the script will skip the build automatically. To force a rebuild, run `bash build.sh clean` first.
+
 ---
 
 ## Running
@@ -119,10 +121,21 @@ Files removed: `build/`, `lib/bin/`, `lib/poo-lib.jar`, `sources.txt`, `lib_sour
 
 | Command | Description |
 |---|---|
-| `bash build.sh` | Build the project (default) |
+| `bash build.sh` | Build the project (skips if already up to date) |
 | `bash build.sh build` | Same as above |
-| `bash build.sh run` | Run the game |
+| `bash build.sh run` | Build if needed, then run the game |
 | `bash build.sh clean` | Remove all generated files |
+
+### Smart rebuild detection
+
+The script compares the modification time of `sokoban.jar` against all `.java` source files. It only rebuilds when:
+- `sokoban.jar` does not exist yet
+- Any `.java` file in `src/` or `lib/src/` was modified after the last build
+
+To force a full rebuild regardless:
+```bash
+bash build.sh clean && bash build.sh
+```
 
 ---
 
