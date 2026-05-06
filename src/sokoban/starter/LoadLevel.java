@@ -27,6 +27,7 @@ public class LoadLevel {
 			s.close();
 		} catch (FileNotFoundException e) {
 			JOptionPane.showMessageDialog(null,"YOU BEAT THE GAME!!!");
+			System.exit(0);
 		}
 		return nivel;
 	}
