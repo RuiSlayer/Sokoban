@@ -9,6 +9,9 @@ A Java implementation of the classic Sokoban puzzle game, built for the POO (Obj
 ### Runtime
 - **Java 17+** (OpenJDK recommended)
 
+### Build Tool
+- **Gradle** (via wrapper — no installation required)
+
 ### Internal Library
 - `pt.iul.ista.poo` — School-provided GUI and utility library (located in `lib/src/`)
   - `pt.iul.ista.poo.gui` — `ImageMatrixGUI`, `ImageTile` (tile-based graphical interface)
@@ -21,8 +24,14 @@ A Java implementation of the classic Sokoban puzzle game, built for the POO (Obj
 
 ```
 .
+├── build.gradle      # Gradle build configuration
+├── settings.gradle   # Gradle project settings
+├── gradlew           # Gradle wrapper (Linux/macOS)
+├── gradlew.bat       # Gradle wrapper (Windows)
+├── gradle/           # Gradle wrapper binaries
 ├── images/           # Game sprite assets (.png)
 ├── levels/           # Level definition files (level0.txt, level1.txt, ...)
+├── scores/           # Leaderboard save files
 ├── lib/
 │   └── src/          # POO library source files (pt.iul.ista.poo.*)
 ├── src/
@@ -31,7 +40,6 @@ A Java implementation of the classic Sokoban puzzle game, built for the POO (Obj
 │   ├── Movabel_Objs/ # Movable objects (Empilhadora, Caixote, BigStone, ...)
 │   └── sokoban/
 │       └── starter/  # Game engine (Main, SokobanGame, Map, LoadLevel, ...)
-├── build.sh          # Build script
 └── README.md
 ```
 
@@ -46,12 +54,6 @@ sudo pacman -S jdk17-openjdk
 sudo archlinux-java set java-17-openjdk
 ```
 
-Verify:
-```bash
-javac --version
-java --version
-```
-
 ### 2. Install Java (Debian/Ubuntu)
 
 ```bash
@@ -64,78 +66,65 @@ sudo apt install openjdk-17-jdk
 sudo dnf install java-17-openjdk-devel
 ```
 
----
-
-## Building
-
-Make the build script executable (first time only):
+Verify your installation:
 
 ```bash
-chmod +x build.sh
+java -version
+javac --version
 ```
 
-Then build the project:
-
-```bash
-bash build.sh
-```
-
-This will:
-1. Compile the `pt.iul.ista.poo` library from `lib/src/`
-2. Compile all project source files in `src/`
-3. Package everything into `sokoban.jar`
-
-> 💡 If the project is already built and no source files have changed, the script will skip the build automatically. To force a rebuild, run `bash build.sh clean` first.
+> No Gradle installation is needed — the project includes a Gradle wrapper (`gradlew`) that downloads and manages Gradle automatically.
 
 ---
 
-## Running
+## Building & Running
+
+### Linux / macOS
 
 ```bash
-bash build.sh run
+# Build and run
+./gradlew run
+
+# Build only
+./gradlew build
 ```
 
-Or directly:
+### Windows
 
 ```bash
-java -jar sokoban.jar
+# Build and run
+gradlew.bat run
+
+# Build only
+gradlew.bat build
 ```
 
-> ⚠️ Always run from the **project root directory** so the game can find the `images/` and `levels/` folders.
+> ⚠️ Always run from the **project root directory** so the game can find the `images/`, `levels/`, and `scores/` folders.
 
 ---
 
 ## Cleaning
 
-To remove all compiled files and generated artifacts:
+To remove all compiled files and build artifacts:
 
 ```bash
-bash build.sh clean
-```
+# Linux/macOS
+./gradlew clean
 
-Files removed: `build/`, `lib/bin/`, `lib/poo-lib.jar`, `sources.txt`, `lib_sources.txt`, `manifest.txt`, `sokoban.jar`.
+# Windows
+gradlew.bat clean
+```
 
 ---
 
-## Build Script Reference
+## Gradle Task Reference
 
 | Command | Description |
 |---|---|
-| `bash build.sh` | Build the project (skips if already up to date) |
-| `bash build.sh build` | Same as above |
-| `bash build.sh run` | Build if needed, then run the game |
-| `bash build.sh clean` | Remove all generated files |
-
-### Smart rebuild detection
-
-The script compares the modification time of `sokoban.jar` against all `.java` source files. It only rebuilds when:
-- `sokoban.jar` does not exist yet
-- Any `.java` file in `src/` or `lib/src/` was modified after the last build
-
-To force a full rebuild regardless:
-```bash
-bash build.sh clean && bash build.sh
-```
+| `./gradlew run` | Build (if needed) and run the game |
+| `./gradlew build` | Compile and package the project |
+| `./gradlew clean` | Remove all generated build files |
+| `./gradlew tasks` | List all available Gradle tasks |
 
 ---
 
@@ -189,4 +178,3 @@ To add a new level, create `levels/levelN.txt` (where N follows the last existin
 | `Jogador_Score` | Tracks the player's score and move count |
 | `LeaderBoard` | Stores and displays high scores |
 | `LevelMesages` | Handles level start/end messages |
-

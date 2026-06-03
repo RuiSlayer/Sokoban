@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+application {
+    mainClass = 'sokoban.starter.Main'
+}
+
+sourceSets {
+    main {
+        java {
+            // Your game source code
+            srcDirs = ['src', 'lib/src']
+        }
+        resources {
+            srcDirs = ['images', 'levels']
+        }
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+// Copy images and levels next to the jar so the game finds them at runtime
+jar {
+    manifest {
+        attributes 'Main-Class': 'sokoban.starter.Main'
+    }
+    from('images') { into 'images' }
+    from('levels')  { into 'levels' }
+}
+
+// Make 'run' task find images/levels relative to project root
+run {
+    workingDir = projectDir
+}
