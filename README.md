@@ -48,7 +48,6 @@ winget install Microsoft.OpenJDK.17
 ```
 ### 2. Install Java (macOS)
 ```bash
-# Using Homebrew
 brew install --cask temurin@17
 ```
 
