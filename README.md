@@ -1,8 +1,7 @@
 # Sokoban - RuiCosta_93529
 A Java implementation of the classic Sokoban puzzle game, built for the POO (Object-Oriented Programming) course at IUL/ISTA. The player controls a forklift (`Empilhadora`) and must push crates (`Caixotes`) onto target tiles (`Alvos`) across multiple levels.
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/523ed61d-99dc-47a6-8ab6-50a878c50b7a" width="1080" alt="Demo">
-</p>
+
+<img src="https://github.com/RuiSlayer/demo_videos/blob/main/sokoban_demo.gif" width="1080" alt="Demo">
 
 ---
 
@@ -16,6 +15,7 @@ A Java implementation of the classic Sokoban puzzle game, built for the POO (Obj
   - `pt.iul.ista.poo.gui` — `ImageMatrixGUI`, `ImageTile` (tile-based graphical interface)
   - `pt.iul.ista.poo.utils` — `Point2D`, `Vector2D`, `Direction`
   - `pt.iul.ista.poo.observer` — `Observer`, `Observed` (event system)
+  
 ---
 
 ## Project Structure
