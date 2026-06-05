@@ -46,6 +46,9 @@ A Java implementation of the classic Sokoban puzzle game, built for the POO (Obj
 ```powershell
 winget install Microsoft.OpenJDK.17
 ```
+```powershell
+[System.Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Microsoft\jdk-17", "Machine")
+```
 ### 2. Install Java (macOS)
 ```bash
 brew install --cask temurin@17
