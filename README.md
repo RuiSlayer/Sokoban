@@ -46,19 +46,24 @@ A Java implementation of the classic Sokoban puzzle game, built for the POO (Obj
 ```powershell
 winget install Microsoft.OpenJDK.17
 ```
+### 2. Install Java (macOS)
+```bash
+# Using Homebrew
+brew install --cask temurin@17
+```
 
-### 2. Install Java (Arch Linux)
+### 3. Install Java (Arch Linux)
 ```bash
 sudo pacman -S jdk17-openjdk
 sudo archlinux-java set java-17-openjdk
 ```
 
-### 3. Install Java (Debian/Ubuntu)
+### 4. Install Java (Debian/Ubuntu)
 ```bash
 sudo apt install openjdk-17-jdk
 ```
 
-### 4. Install Java (Fedora)
+### 5. Install Java (Fedora)
 ```bash
 sudo dnf install java-17-openjdk-devel
 ```
