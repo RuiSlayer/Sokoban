@@ -44,9 +44,10 @@ A Java implementation of the classic Sokoban puzzle game, built for the POO (Obj
 
 ### 1. Install Java (Windows)
 ```powershell
-winget install Microsoft.OpenJDK.17
-[System.Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Microsoft\jdk-17", "Machine")
+winget install -e --id Oracle.JDK.17
+[System.Environment]::SetEnvironmentVariable("JAVA_HOME", "C:\Program Files\Java\jdk-17", "Machine")
 ```
+> ⚠️ You need to run it as a PowerShell administrator.
 ### 2. Install Java (macOS)
 ```bash
 brew install --cask temurin@17
@@ -93,9 +94,9 @@ cd Sokoban
 ### Windows
 ```bash
 # Build and run
-gradlew.bat run
+.\gradlew.bat run
 # Build only
-gradlew.bat build
+.\gradlew.bat build
 ```
 > ⚠️ Always run from the **project root directory** so the game can find the `images/`, `levels/`, and `scores/` folders.
 ---
@@ -105,7 +106,7 @@ To remove all compiled files and build artifacts:
 # Linux/macOS
 ./gradlew clean
 # Windows
-gradlew.bat clean
+.\gradlew.bat clean
 ```
 ---
 ## Gradle Task Reference
